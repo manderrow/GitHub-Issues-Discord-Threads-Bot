@@ -249,27 +249,6 @@ export async function createIssueComment(thread: Thread, params: Message) {
   }
 }
 
-export async function deleteIssue(thread: Thread) {
-  const { node_id } = thread;
-  if (!node_id) {
-    error("Thread does not have a node ID", thread);
-    return;
-  }
-
-  try {
-    await graphqlWithAuth(
-      `mutation {deleteIssue(input: {issueId: "${node_id}"}) {clientMutationId}}`,
-    );
-    info(Actions.Deleted, thread);
-  } catch (err) {
-    if (err instanceof Error) {
-      error(`Error deleting issue: ${err.message}`, thread);
-    } else {
-      error("Error deleting issue due to an unknown error", thread);
-    }
-  }
-}
-
 export async function deleteComment(thread: Thread, comment_id: number) {
   try {
     await octokit.rest.issues.deleteComment({

@@ -14,7 +14,6 @@ import {
   createIssue,
   createIssueComment,
   deleteComment,
-  deleteIssue,
   getIssues,
   lockIssue,
   openIssue,
@@ -142,13 +141,4 @@ export async function handleMessageDelete(params: Message | PartialMessage) {
 
   const comment = thread.comments.splice(commentIndex, 1)[0];
   deleteComment(thread, comment.git_id);
-}
-
-export async function handleThreadDelete(params: AnyThreadChannel) {
-  if (params.parentId !== config.DISCORD_CHANNEL_ID) return;
-
-  const thread = store.threads.find((item) => item.id === params.id);
-  if (!thread) return;
-
-  deleteIssue(thread);
 }
