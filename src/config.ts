@@ -8,6 +8,7 @@ const {
   GITHUB_USERNAME,
   GITHUB_REPOSITORY,
   DISCORD_CHANNEL_ID,
+  GITHUB_WEBHOOK_TOKEN,
 } = process.env;
 
 if (
@@ -15,15 +16,17 @@ if (
   !GITHUB_ACCESS_TOKEN ||
   !GITHUB_USERNAME ||
   !GITHUB_REPOSITORY ||
-  !DISCORD_CHANNEL_ID
+  !DISCORD_CHANNEL_ID ||
+  !GITHUB_WEBHOOK_TOKEN
 ) {
   throw new Error("Missing environment variables");
 }
 
-export const config = {
+export default {
   DISCORD_TOKEN,
   GITHUB_ACCESS_TOKEN,
   GITHUB_USERNAME,
   GITHUB_REPOSITORY,
   DISCORD_CHANNEL_ID,
+  GITHUB_WEBHOOK_TOKEN,
 };

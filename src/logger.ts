@@ -1,5 +1,5 @@
 import winston, { format } from "winston";
-import { config } from "./config";
+import config from "./config";
 import { Thread } from "./interfaces";
 import client from "./discord/discord";
 

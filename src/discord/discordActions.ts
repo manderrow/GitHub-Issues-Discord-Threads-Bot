@@ -1,5 +1,5 @@
 import { ForumChannel, MessagePayload, ThreadChannel } from "discord.js";
-import { config } from "../config";
+import config from "../config";
 import { Thread } from "../interfaces";
 import {
   ActionValue,

@@ -1,7 +1,7 @@
 import { graphql } from "@octokit/graphql";
 import { Octokit } from "@octokit/rest";
 import { Attachment, Collection, Message } from "discord.js";
-import { config } from "../config";
+import config from "../config";
 import { GitIssue, Thread } from "../interfaces";
 import {
   ActionValue,

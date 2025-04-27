@@ -1,4 +1,5 @@
 import express from "express";
+import config from "../config";
 import { GithubHandlerFunction } from "../interfaces";
 import {
   handleClosed,
@@ -11,13 +12,14 @@ import {
 } from "./githubHandlers";
 
 const app = express();
-app.use(express.json());
+app.use(
+  express.json({
+    // See https://docs.github.com/en/webhooks/webhook-events-and-payloads#payload-cap
+    limit: 25 * 1024 * 1024,
+  }),
+);
 
 export function initGithub() {
-  app.get("", (_, res) => {
-    res.json({ msg: "github webhooks work" });
-  });
-
   const githubActions: {
     [key: string]: GithubHandlerFunction;
   } = {
@@ -30,10 +32,10 @@ export function initGithub() {
     deleted: (req) => handleDeleted(req),
   };
 
-  app.post("/", async (req, res) => {
+  app.post(`/${config.GITHUB_WEBHOOK_TOKEN}`, async (req, res) => {
     const githubAction = githubActions[req.body.action];
     githubAction && githubAction(req);
-    res.json({ msg: "ok" });
+    res.status(200);
   });
 
   const PORT = process.env.PORT || 5000;

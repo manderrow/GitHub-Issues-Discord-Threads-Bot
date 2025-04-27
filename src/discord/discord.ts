@@ -4,7 +4,7 @@ import {
   GatewayIntentBits,
   SimpleShardingStrategy,
 } from "discord.js";
-import { config } from "../config";
+import config from "../config";
 import {
   handleChannelUpdate,
   handleClientReady,
